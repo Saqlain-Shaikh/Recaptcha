@@ -112,7 +112,7 @@
                         <i class="fa fa-eye"></i>
                     </span>
             </div>
-            <div class="g-recaptcha" data-sitekey="6LcfmQYqAAAAAMu558TNrxI-P71MZ8DlDkqG5IkU"></div>
+            <div class="g-recaptcha" data-sitekey="{{ frappe.db.get_single_value('Recaptcha Settings', 'site_key') }}"></div>
             <button type="submit">Login</button>
             <div class="error-message" id="error-message"></div>
         </form>
