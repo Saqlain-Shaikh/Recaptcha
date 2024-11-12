@@ -28,7 +28,7 @@ def login_with_recaptcha():
         frappe.local.response["message"] = _('reCAPTCHA verification failed')
         return
 
-    # Proceed with ERPNext authentication logic
+    # Proceed with ERPNext authentication logic i have done issue in code
     try:
         frappe.auth.login_as(username)
         frappe.local.response["message"] = _('Logged In')
