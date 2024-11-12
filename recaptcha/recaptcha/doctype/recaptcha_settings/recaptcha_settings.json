@@ -1,0 +1,46 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-11-10 16:07:23.910695",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "site_key",
+  "secret_key"
+ ],
+ "fields": [
+  {
+   "fieldname": "site_key",
+   "fieldtype": "Data",
+   "label": "Site Key"
+  },
+  {
+   "fieldname": "secret_key",
+   "fieldtype": "Data",
+   "label": "Secret Key"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-11-10 16:09:42.736354",
+ "modified_by": "Administrator",
+ "module": "Recaptcha",
+ "name": "Recaptcha Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

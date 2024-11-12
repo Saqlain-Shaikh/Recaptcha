@@ -7,7 +7,7 @@ SECRET_KEY = '6LcfmQYqAAAAANoUgs2TDjyWdodz3lWYdT6fCc7z'
 @frappe.whitelist(allow_guest=True)
 def login_with_recaptcha():
     """
-    Custom login method with reCAPTCHA verification.
+    Custom login method with reCAPTCHA verification develop by saqlain shaikh.
     """
     data = frappe.local.form_dict
     username = data.get('usr')
