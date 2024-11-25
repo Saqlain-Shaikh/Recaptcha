@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
     <style>
         :root {
             --text-xl: 1.25rem;
@@ -25,12 +25,10 @@
 
         .page-card-head {
             text-align: center;
-
         }
 
         .page-card-head img {
             max-height: 42px;
-
         }
 
         .page-card-head h4 {
@@ -83,10 +81,6 @@
             font-size: 16px;
         }
 
-        .g-recaptcha {
-            margin-bottom: 15px;
-        }
-
         .error-message {
             color: red;
             font-size: 12px;
@@ -109,18 +103,44 @@
             <div class="password-wrapper">
                 <input type="password" id="password" placeholder="Password" required>
                 <span class="toggle-password" id="toggle-password">
-                        <i class="fa fa-eye"></i>
-                    </span>
+                    <i class="fa fa-eye"></i>
+                </span>
             </div>
-            <div class="g-recaptcha" data-sitekey="{{ frappe.db.get_single_value('Recaptcha Settings', 'site_key') }}"></div>
+            <!-- Placeholder for dynamically rendered reCAPTCHA -->
+            <div id="recaptcha-container"></div>
             <button type="submit">Login</button>
             <div class="error-message" id="error-message"></div>
         </form>
     </div>
 </div>
 <script>
+    async function loadRecaptcha() {
+        try {
+            // Fetch the reCAPTCHA sitekey from the backend API
+            const response = await fetch('/api/method/get_recaptcha_sitekey');
+            const data = await response.json();
+
+            if (data.site_key) {
+                // Render the reCAPTCHA widget with the fetched site key
+                grecaptcha.ready(() => {
+                    grecaptcha.render('recaptcha-container', {
+                        sitekey: data.site_key
+                    });
+                });
+            } else {
+                console.error('Recaptcha site key not available.');
+            }
+        } catch (error) {
+            console.error('Error fetching recaptcha site key:', error);
+        }
+    }
+
+    // Load the reCAPTCHA widget when the page loads
+    document.addEventListener('DOMContentLoaded', loadRecaptcha);
+
     document.getElementById('login-form').addEventListener('submit', async function (e) {
         e.preventDefault();
+
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         const recaptchaResponse = grecaptcha.getResponse();
@@ -158,7 +178,7 @@
         }
     });
 
-    // Toggle password visibility saqlains code
+    // Toggle password visibility
     const togglePassword = document.getElementById('toggle-password');
     const passwordField = document.getElementById('password');
 
