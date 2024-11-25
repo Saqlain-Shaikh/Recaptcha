@@ -13,3 +13,4 @@ override_whitelisted_methods = {
 
 # Enable CORS for API requests during development (for local testing)
 cors = ["*"]
+
