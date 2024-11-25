@@ -117,7 +117,7 @@
     async function loadRecaptcha() {
         try {
             // Fetch the reCAPTCHA sitekey from the backend API
-            const response = await fetch('/api/method/get_recaptcha_sitekey');
+            const response = await fetch('/api/method/recaptcha.recaptcha.doctype.recaptcha_settings.api.get_recaptcha_sitekey');
             const data = await response.json();
 
             if (data.site_key) {
